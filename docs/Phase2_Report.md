@@ -3,8 +3,7 @@
 
 ### Student Information
 **Course**: Data Structures and Algorithms  
-**Phase**: 2 - Proof of Concept Implementation  
-**Date**: December 2024  
+**Phase**: 2 - Proof of Concept Implementation   
 **Project**: Real-World Applications Using Python  
 
 ---

@@ -38,23 +38,23 @@ class RecommendationSystemCLI:
     
     def display_menu(self):
         """Display the main menu options."""
-        print("\n📋 MAIN MENU")
+        print("\n MAIN MENU")
         print("-" * 40)
-        print("1. 🏗️  Load Demo Data")
-        print("2. 👤 User Interaction Management")
-        print("3. 🔗 Product Similarity Management")
-        print("4. 📊 Behavior Analysis")
-        print("5. 🏷️  Category Management")
-        print("6. 🎯 Generate Recommendations")
-        print("7. 📈 System Statistics")
-        print("8. 🧪 Run Test Suite")
-        print("9. 💾 Data Import/Export")
-        print("0. 🚪 Exit")
+        print("1.   Load Demo Data")
+        print("2.  User Interaction Management")
+        print("3.  Product Similarity Management")
+        print("4.  Behavior Analysis")
+        print("5.   Category Management")
+        print("6.  Generate Recommendations")
+        print("7.  System Statistics")
+        print("8.  Run Test Suite")
+        print("9.  Data Import/Export")
+        print("0.  Exit")
         print("-" * 40)
     
     def load_demo_data(self):
         """Load comprehensive demo data for testing."""
-        print("\n🏗️ LOADING DEMO DATA...")
+        print("\n LOADING DEMO DATA...")
         print("-" * 40)
         
         try:
@@ -165,20 +165,20 @@ class RecommendationSystemCLI:
                     self.engine.add_user_interaction(user_id, item_id, rating, action)
             
             self.demo_data_loaded = True
-            print("\n✅ Demo data loaded successfully!")
-            print(f"   📊 Categories: {self.engine.category_tree.total_categories}")
-            print(f"   📦 Products: {self.engine.category_tree.total_products}")
-            print(f"   👥 Users: 5")
-            print(f"   🤝 Interactions: {self.engine.user_item_table.size}")
-            print(f"   🔗 Similarities: {self.engine.similarity_graph.edge_count}")
+            print("\n Demo data loaded successfully!")
+            print(f"    Categories: {self.engine.category_tree.total_categories}")
+            print(f"    Products: {self.engine.category_tree.total_products}")
+            print(f"    Users: 5")
+            print(f"    Interactions: {self.engine.user_item_table.size}")
+            print(f"    Similarities: {self.engine.similarity_graph.edge_count}")
             
         except Exception as e:
-            print(f"❌ Error loading demo data: {e}")
+            print(f" Error loading demo data: {e}")
     
     def user_interaction_menu(self):
         """Handle user interaction management."""
         while True:
-            print("\n👤 USER INTERACTION MANAGEMENT")
+            print("\n USER INTERACTION MANAGEMENT")
             print("-" * 40)
             print("1. Add User Interaction")
             print("2. View User Profile")
@@ -202,11 +202,11 @@ class RecommendationSystemCLI:
             elif choice == "0":
                 break
             else:
-                print("❌ Invalid choice! Please try again.")
+                print(" Invalid choice! Please try again.")
     
     def _add_user_interaction(self):
         """Add a new user interaction."""
-        print("\n➕ ADD USER INTERACTION")
+        print("\n ADD USER INTERACTION")
         print("-" * 30)
         
         try:
@@ -216,47 +216,47 @@ class RecommendationSystemCLI:
             action = input("Action (purchase/view/cart_add/wishlist_add): ").strip()
             
             if not all([user_id, item_id]) or not 1.0 <= rating <= 5.0:
-                print("❌ Invalid input! Please check your values.")
+                print(" Invalid input! Please check your values.")
                 return
             
             self.engine.add_user_interaction(user_id, item_id, rating, action)
-            print(f"✅ Added interaction: {user_id} → {item_id} ({rating}⭐, {action})")
+            print(f" Added interaction: {user_id} → {item_id} ({rating}, {action})")
             
         except ValueError:
-            print("❌ Invalid rating! Please enter a number between 1.0 and 5.0.")
+            print(" Invalid rating! Please enter a number between 1.0 and 5.0.")
         except Exception as e:
-            print(f"❌ Error adding interaction: {e}")
+            print(f" Error adding interaction: {e}")
     
     def _view_user_profile(self):
         """View a user's complete profile and interaction history."""
-        print("\n👁️ VIEW USER PROFILE")
+        print("\n VIEW USER PROFILE")
         print("-" * 25)
         
         user_id = input("Enter User ID: ").strip()
         if not user_id:
-            print("❌ Invalid user ID!")
+            print(" Invalid user ID!")
             return
         
         # Get user interactions
         interactions = self.engine.user_item_table.get_user_interactions(user_id)
         
         if not interactions:
-            print(f"❌ No interactions found for user '{user_id}'")
+            print(f" No interactions found for user '{user_id}'")
             return
         
-        print(f"\n📊 PROFILE FOR USER: {user_id}")
+        print(f"\n PROFILE FOR USER: {user_id}")
         print("-" * 50)
         print(f"Total Interactions: {len(interactions)}")
         
         # Display interactions
-        print("\n🛍️ INTERACTION HISTORY:")
+        print("\n INTERACTION HISTORY:")
         for item_id, data in interactions:
-            print(f"  • {item_id}: {data['rating']}⭐ ({data['action']}) - {data['timestamp'][:10]}")
+            print(f"  • {item_id}: {data['rating']} ({data['action']}) - {data['timestamp'][:10]}")
         
         # Get behavior analysis
         try:
             pattern = self.engine.behavior_tree.get_user_behavior_pattern(user_id, days=30)
-            print(f"\n📈 BEHAVIOR ANALYSIS (Last 30 days):")
+            print(f"\n BEHAVIOR ANALYSIS (Last 30 days):")
             print(f"  • Total interactions: {pattern['total_interactions']}")
             print(f"  • Action breakdown: {pattern['action_counts']}")
             
@@ -265,47 +265,47 @@ class RecommendationSystemCLI:
                 for item_id, count in pattern['favorite_items'][:3]:
                     print(f"    - {item_id}: {count} interactions")
         except Exception as e:
-            print(f"  ⚠️ Could not analyze behavior patterns: {e}")
+            print(f"   Could not analyze behavior patterns: {e}")
     
     def _search_user_interactions(self):
         """Search for specific user interactions."""
-        print("\n🔍 SEARCH USER INTERACTIONS")
+        print("\n SEARCH USER INTERACTIONS")
         print("-" * 35)
         
         user_id = input("User ID: ").strip()
         item_id = input("Item ID (optional): ").strip()
         
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         if item_id:
             # Search for specific interaction
             result = self.engine.user_item_table.get(user_id, item_id)
             if result:
-                print(f"\n✅ Found interaction:")
+                print(f"\n Found interaction:")
                 print(f"  User: {user_id}")
                 print(f"  Item: {item_id}")
-                print(f"  Rating: {result['rating']}⭐")
+                print(f"  Rating: {result['rating']}")
                 print(f"  Action: {result['action']}")
                 print(f"  Timestamp: {result['timestamp']}")
             else:
-                print(f"❌ No interaction found between {user_id} and {item_id}")
+                print(f" No interaction found between {user_id} and {item_id}")
         else:
             # Search for all user interactions
             interactions = self.engine.user_item_table.get_user_interactions(user_id)
             if interactions:
-                print(f"\n✅ Found {len(interactions)} interactions for {user_id}:")
+                print(f"\n Found {len(interactions)} interactions for {user_id}:")
                 for item_id, data in interactions[:10]:  # Show first 10
-                    print(f"  • {item_id}: {data['rating']}⭐ ({data['action']})")
+                    print(f"  • {item_id}: {data['rating']} ({data['action']})")
                 if len(interactions) > 10:
                     print(f"  ... and {len(interactions) - 10} more")
             else:
-                print(f"❌ No interactions found for user {user_id}")
+                print(f" No interactions found for user {user_id}")
     
     def _update_interaction(self):
         """Update an existing interaction."""
-        print("\n✏️ UPDATE INTERACTION")
+        print("\n UPDATE INTERACTION")
         print("-" * 25)
         
         try:
@@ -315,60 +315,60 @@ class RecommendationSystemCLI:
             # Check if interaction exists
             existing = self.engine.user_item_table.get(user_id, item_id)
             if not existing:
-                print(f"❌ No interaction found between {user_id} and {item_id}")
+                print(f" No interaction found between {user_id} and {item_id}")
                 return
             
             print(f"\nCurrent interaction:")
-            print(f"  Rating: {existing['rating']}⭐")
+            print(f"  Rating: {existing['rating']}")
             print(f"  Action: {existing['action']}")
             
             new_rating = float(input("New Rating (1.0-5.0): ").strip())
             new_action = input("New Action: ").strip()
             
             if not 1.0 <= new_rating <= 5.0:
-                print("❌ Invalid rating!")
+                print(" Invalid rating!")
                 return
             
             self.engine.add_user_interaction(user_id, item_id, new_rating, new_action)
-            print(f"✅ Updated interaction: {user_id} → {item_id} ({new_rating}⭐, {new_action})")
+            print(f" Updated interaction: {user_id} → {item_id} ({new_rating}, {new_action})")
             
         except ValueError:
-            print("❌ Invalid rating! Please enter a number.")
+            print(" Invalid rating! Please enter a number.")
         except Exception as e:
-            print(f"❌ Error updating interaction: {e}")
+            print(f" Error updating interaction: {e}")
     
     def _delete_interaction(self):
         """Delete a user interaction."""
-        print("\n🗑️ DELETE INTERACTION")
+        print("\n DELETE INTERACTION")
         print("-" * 25)
         
         user_id = input("User ID: ").strip()
         item_id = input("Item ID: ").strip()
         
         if not user_id or not item_id:
-            print("❌ Both User ID and Item ID are required!")
+            print(" Both User ID and Item ID are required!")
             return
         
         # Check if interaction exists
         existing = self.engine.user_item_table.get(user_id, item_id)
         if not existing:
-            print(f"❌ No interaction found between {user_id} and {item_id}")
+            print(f" No interaction found between {user_id} and {item_id}")
             return
         
         confirm = input(f"Delete interaction {user_id} → {item_id}? (y/N): ").strip().lower()
         if confirm == 'y':
             success = self.engine.user_item_table.delete(user_id, item_id)
             if success:
-                print("✅ Interaction deleted successfully!")
+                print(" Interaction deleted successfully!")
             else:
-                print("❌ Failed to delete interaction!")
+                print(" Failed to delete interaction!")
         else:
-            print("❌ Deletion cancelled.")
+            print(" Deletion cancelled.")
     
     def product_similarity_menu(self):
         """Handle product similarity management."""
         while True:
-            print("\n🔗 PRODUCT SIMILARITY MANAGEMENT")
+            print("\n PRODUCT SIMILARITY MANAGEMENT")
             print("-" * 45)
             print("1. Add Product Similarity")
             print("2. Find Similar Products")
@@ -392,11 +392,11 @@ class RecommendationSystemCLI:
             elif choice == "0":
                 break
             else:
-                print("❌ Invalid choice! Please try again.")
+                print(" Invalid choice! Please try again.")
     
     def _add_product_similarity(self):
         """Add a product similarity relationship."""
-        print("\n➕ ADD PRODUCT SIMILARITY")
+        print("\n ADD PRODUCT SIMILARITY")
         print("-" * 35)
         
         try:
@@ -405,32 +405,32 @@ class RecommendationSystemCLI:
             similarity = float(input("Similarity Score (0.0-1.0): ").strip())
             
             if not all([product1, product2]) or not 0.0 <= similarity <= 1.0:
-                print("❌ Invalid input! Check product IDs and similarity score.")
+                print(" Invalid input! Check product IDs and similarity score.")
                 return
             
             self.engine.add_product_similarity(product1, product2, similarity)
-            print(f"✅ Added similarity: {product1} ↔ {product2} ({similarity:.3f})")
+            print(f" Added similarity: {product1} ↔ {product2} ({similarity:.3f})")
             
         except ValueError:
-            print("❌ Invalid similarity score! Please enter a number between 0.0 and 1.0.")
+            print(" Invalid similarity score! Please enter a number between 0.0 and 1.0.")
         except Exception as e:
-            print(f"❌ Error adding similarity: {e}")
+            print(f" Error adding similarity: {e}")
     
     def _find_similar_products(self):
         """Find products similar to a given product."""
-        print("\n🔍 FIND SIMILAR PRODUCTS")
+        print("\n FIND SIMILAR PRODUCTS")
         print("-" * 30)
         
         product_id = input("Product ID: ").strip()
         if not product_id:
-            print("❌ Product ID is required!")
+            print(" Product ID is required!")
             return
         
         try:
             min_similarity = float(input("Minimum Similarity (0.0-1.0, default 0.0): ").strip() or "0.0")
             max_results = int(input("Maximum Results (default 10): ").strip() or "10")
         except ValueError:
-            print("❌ Invalid input! Using defaults.")
+            print(" Invalid input! Using defaults.")
             min_similarity = 0.0
             max_results = 10
         
@@ -439,14 +439,14 @@ class RecommendationSystemCLI:
             product_id, min_similarity, max_results)
         
         if similar_products:
-            print(f"\n✅ Found {len(similar_products)} similar products to '{product_id}':")
+            print(f"\n Found {len(similar_products)} similar products to '{product_id}':")
             for similar_product, score in similar_products:
                 print(f"  • {similar_product}: {score:.3f} similarity")
         else:
-            print(f"❌ No similar products found for '{product_id}'")
+            print(f" No similar products found for '{product_id}'")
         
         # Try advanced similarity search
-        print(f"\n🧠 Advanced similarity analysis (including transitive relationships):")
+        print(f"\n Advanced similarity analysis (including transitive relationships):")
         advanced_similar = self.engine.similarity_graph.get_top_k_similar_products_advanced(
             product_id, k=max_results, use_transitive=True)
         
@@ -459,14 +459,14 @@ class RecommendationSystemCLI:
     
     def _find_recommendation_path(self):
         """Find a recommendation path between two products."""
-        print("\n🛤️ FIND RECOMMENDATION PATH")
+        print("\n FIND RECOMMENDATION PATH")
         print("-" * 35)
         
         start_product = input("Start Product ID: ").strip()
         target_product = input("Target Product ID: ").strip()
         
         if not start_product or not target_product:
-            print("❌ Both product IDs are required!")
+            print(" Both product IDs are required!")
             return
         
         try:
@@ -478,15 +478,15 @@ class RecommendationSystemCLI:
             start_product, target_product, max_depth)
         
         if path:
-            print(f"\n✅ Found recommendation path:")
+            print(f"\n Found recommendation path:")
             print("   " + " → ".join(path))
             print(f"   Path length: {len(path)} products")
         else:
-            print(f"❌ No recommendation path found between '{start_product}' and '{target_product}'")
+            print(f" No recommendation path found between '{start_product}' and '{target_product}'")
     
     def _analyze_product_clusters(self):
         """Analyze product clusters in the similarity network."""
-        print("\n🔍 PRODUCT CLUSTER ANALYSIS")
+        print("\n PRODUCT CLUSTER ANALYSIS")
         print("-" * 40)
         
         try:
@@ -497,17 +497,17 @@ class RecommendationSystemCLI:
         clusters = self.engine.similarity_graph.get_product_clusters(min_similarity)
         
         if clusters:
-            print(f"\n✅ Found {len(clusters)} product clusters:")
+            print(f"\n Found {len(clusters)} product clusters:")
             for i, cluster in enumerate(clusters, 1):
                 print(f"\n  Cluster {i} ({len(cluster)} products):")
                 for product in cluster:
                     print(f"    • {product}")
         else:
-            print(f"❌ No clusters found with minimum similarity {min_similarity}")
+            print(f" No clusters found with minimum similarity {min_similarity}")
     
     def _view_similarity_stats(self):
         """View similarity network statistics."""
-        print("\n📊 SIMILARITY NETWORK STATISTICS")
+        print("\n SIMILARITY NETWORK STATISTICS")
         print("-" * 45)
         
         stats = self.engine.similarity_graph.get_graph_statistics()
@@ -531,7 +531,7 @@ class RecommendationSystemCLI:
     def generate_recommendations_menu(self):
         """Handle recommendation generation."""
         while True:
-            print("\n🎯 RECOMMENDATION GENERATION")
+            print("\n RECOMMENDATION GENERATION")
             print("-" * 40)
             print("1. Collaborative Filtering")
             print("2. Content-Based Filtering")
@@ -558,16 +558,16 @@ class RecommendationSystemCLI:
             elif choice == "0":
                 break
             else:
-                print("❌ Invalid choice! Please try again.")
+                print(" Invalid choice! Please try again.")
     
     def _generate_collaborative_recommendations(self):
         """Generate collaborative filtering recommendations."""
-        print("\n🤝 COLLABORATIVE FILTERING RECOMMENDATIONS")
+        print("\n COLLABORATIVE FILTERING RECOMMENDATIONS")
         print("-" * 50)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -580,23 +580,23 @@ class RecommendationSystemCLI:
         end_time = time.time()
         
         if recommendations:
-            print(f"\n✅ Collaborative filtering recommendations for '{user_id}':")
+            print(f"\n Collaborative filtering recommendations for '{user_id}':")
             for item_id, predicted_rating in recommendations:
                 print(f"  • {item_id}: {predicted_rating:.3f} predicted rating")
         else:
-            print(f"❌ No collaborative recommendations found for '{user_id}'")
+            print(f" No collaborative recommendations found for '{user_id}'")
             print("   (This might happen if the user has no similar users)")
         
-        print(f"\n⏱️ Generation time: {(end_time - start_time)*1000:.2f} ms")
+        print(f"\n Generation time: {(end_time - start_time)*1000:.2f} ms")
     
     def _generate_content_recommendations(self):
         """Generate content-based filtering recommendations."""
-        print("\n📄 CONTENT-BASED FILTERING RECOMMENDATIONS")
+        print("\n CONTENT-BASED FILTERING RECOMMENDATIONS")
         print("-" * 50)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -609,23 +609,23 @@ class RecommendationSystemCLI:
         end_time = time.time()
         
         if recommendations:
-            print(f"\n✅ Content-based recommendations for '{user_id}':")
+            print(f"\n Content-based recommendations for '{user_id}':")
             for item_id, similarity_score in recommendations:
                 print(f"  • {item_id}: {similarity_score:.3f} similarity score")
         else:
-            print(f"❌ No content-based recommendations found for '{user_id}'")
+            print(f" No content-based recommendations found for '{user_id}'")
             print("   (This might happen if the user has no highly-rated items with similarities)")
         
-        print(f"\n⏱️ Generation time: {(end_time - start_time)*1000:.2f} ms")
+        print(f"\n Generation time: {(end_time - start_time)*1000:.2f} ms")
     
     def _generate_category_recommendations(self):
         """Generate category-based recommendations."""
-        print("\n🏷️ CATEGORY-BASED RECOMMENDATIONS")
+        print("\n CATEGORY-BASED RECOMMENDATIONS")
         print("-" * 40)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -638,22 +638,22 @@ class RecommendationSystemCLI:
         end_time = time.time()
         
         if recommendations:
-            print(f"\n✅ Category-based recommendations for '{user_id}':")
+            print(f"\n Category-based recommendations for '{user_id}':")
             for item_id in recommendations:
                 print(f"  • {item_id}")
         else:
-            print(f"❌ No category-based recommendations found for '{user_id}'")
+            print(f" No category-based recommendations found for '{user_id}'")
         
-        print(f"\n⏱️ Generation time: {(end_time - start_time)*1000:.2f} ms")
+        print(f"\n Generation time: {(end_time - start_time)*1000:.2f} ms")
     
     def _generate_behavior_recommendations(self):
         """Generate behavior-based recommendations."""
-        print("\n📊 BEHAVIOR-BASED RECOMMENDATIONS")
+        print("\n BEHAVIOR-BASED RECOMMENDATIONS")
         print("-" * 40)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -666,23 +666,23 @@ class RecommendationSystemCLI:
         end_time = time.time()
         
         if recommendations:
-            print(f"\n✅ Behavior-based recommendations for '{user_id}':")
+            print(f"\n Behavior-based recommendations for '{user_id}':")
             for item_id in recommendations:
                 print(f"  • {item_id}")
         else:
-            print(f"❌ No behavior-based recommendations found for '{user_id}'")
+            print(f" No behavior-based recommendations found for '{user_id}'")
             print("   (This might happen if the user has no recent activity)")
         
-        print(f"\n⏱️ Generation time: {(end_time - start_time)*1000:.2f} ms")
+        print(f"\n Generation time: {(end_time - start_time)*1000:.2f} ms")
     
     def _generate_hybrid_recommendations(self):
         """Generate hybrid recommendations."""
-        print("\n🎯 HYBRID RECOMMENDATIONS (ALL STRATEGIES)")
+        print("\n HYBRID RECOMMENDATIONS (ALL STRATEGIES)")
         print("-" * 50)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -695,7 +695,7 @@ class RecommendationSystemCLI:
         end_time = time.time()
         
         if recommendations:
-            print(f"\n✅ Hybrid recommendations for '{user_id}':")
+            print(f"\n Hybrid recommendations for '{user_id}':")
             print("   (Combined using weighted scoring from all strategies)")
             print()
             
@@ -709,18 +709,18 @@ class RecommendationSystemCLI:
                 print(f"     Strategies: {', '.join(strategies)}")
                 print()
         else:
-            print(f"❌ No hybrid recommendations found for '{user_id}'")
+            print(f" No hybrid recommendations found for '{user_id}'")
         
-        print(f"⏱️ Generation time: {(end_time - start_time)*1000:.2f} ms")
+        print(f" Generation time: {(end_time - start_time)*1000:.2f} ms")
     
     def _compare_all_strategies(self):
         """Compare all recommendation strategies side by side."""
-        print("\n📊 STRATEGY COMPARISON")
+        print("\n STRATEGY COMPARISON")
         print("-" * 30)
         
         user_id = input("User ID: ").strip()
         if not user_id:
-            print("❌ User ID is required!")
+            print(" User ID is required!")
             return
         
         try:
@@ -728,7 +728,7 @@ class RecommendationSystemCLI:
         except ValueError:
             num_recs = 5
         
-        print(f"\n🔍 Comparing recommendation strategies for '{user_id}':")
+        print(f"\n Comparing recommendation strategies for '{user_id}':")
         print("=" * 80)
         
         strategies = [
@@ -760,12 +760,12 @@ class RecommendationSystemCLI:
         
         # Display results
         for strategy_name, result in results.items():
-            print(f"\n🎯 {strategy_name}:")
+            print(f"\n {strategy_name}:")
             print(f"   Count: {result['count']} recommendations")
             print(f"   Time: {result['time']:.2f} ms")
             
             if 'error' in result:
-                print(f"   ❌ Error: {result['error']}")
+                print(f"    Error: {result['error']}")
             elif result['recommendations']:
                 print("   Results:")
                 for item in result['recommendations'][:3]:  # Show top 3
@@ -779,10 +779,10 @@ class RecommendationSystemCLI:
                 if len(result['recommendations']) > 3:
                     print(f"     ... and {len(result['recommendations']) - 3} more")
             else:
-                print("   ❌ No recommendations found")
+                print("    No recommendations found")
         
         # Generate hybrid for comparison
-        print(f"\n🎯 Hybrid (Combined):")
+        print(f"\n Hybrid (Combined):")
         start_time = time.time()
         hybrid_recs = self.engine.get_hybrid_recommendations(user_id, num_recs)
         end_time = time.time()
@@ -796,21 +796,21 @@ class RecommendationSystemCLI:
     
     def system_statistics_menu(self):
         """Display comprehensive system statistics."""
-        print("\n📈 SYSTEM STATISTICS")
+        print("\n SYSTEM STATISTICS")
         print("-" * 30)
         
         if not self.demo_data_loaded:
-            print("⚠️ Demo data not loaded. Statistics may be limited.")
+            print(" Demo data not loaded. Statistics may be limited.")
             print("Consider loading demo data first (Option 1 from main menu).")
         
         stats = self.engine.get_system_statistics()
         
-        print(f"\n🏗️ DATA STRUCTURE STATISTICS:")
+        print(f"\n DATA STRUCTURE STATISTICS:")
         print("-" * 40)
         
         # Hash Table Statistics
         ui_stats = stats['user_item_interactions']
-        print(f"📊 User-Item Hash Table:")
+        print(f" User-Item Hash Table:")
         print(f"   • Total interactions: {ui_stats['size']}")
         print(f"   • Table capacity: {ui_stats['capacity']}")
         print(f"   • Load factor: {ui_stats['load_factor']:.3f}")
@@ -820,7 +820,7 @@ class RecommendationSystemCLI:
         
         # Graph Statistics
         graph_stats = stats['product_similarities']
-        print(f"\n🔗 Product Similarity Graph:")
+        print(f"\n Product Similarity Graph:")
         print(f"   • Total products: {graph_stats['products']}")
         print(f"   • Total edges: {graph_stats['edges']}")
         print(f"   • Graph density: {graph_stats['density']:.4f}")
@@ -829,15 +829,15 @@ class RecommendationSystemCLI:
         
         # Tree Statistics
         tree_stats = stats['behavior_tracking']
-        print(f"\n🌳 User Behavior Tree:")
+        print(f"\n User Behavior Tree:")
         print(f"   • Total records: {tree_stats['size']}")
         print(f"   • Tree height: {tree_stats['height']}")
-        print(f"   • Is balanced: {'✅ Yes' if tree_stats['is_balanced'] else '❌ No'}")
+        print(f"   • Is balanced: {' Yes' if tree_stats['is_balanced'] else ' No'}")
         print(f"   • Balance factor: {tree_stats['balance_factor']}")
         
         # Category Tree Statistics
         cat_stats = stats['category_hierarchy']
-        print(f"\n🏷️ Category Hierarchy:")
+        print(f"\n Category Hierarchy:")
         print(f"   • Total categories: {cat_stats['total_categories']}")
         print(f"   • Total products: {cat_stats['total_products']}")
         print(f"   • Tree depth: {cat_stats['max_depth']}")
@@ -845,13 +845,13 @@ class RecommendationSystemCLI:
         print(f"   • Avg products per category: {cat_stats['avg_products_per_category']:.2f}")
         
         # Performance Statistics
-        print(f"\n⚡ PERFORMANCE STATISTICS:")
+        print(f"\n PERFORMANCE STATISTICS:")
         print("-" * 30)
         print(f"   • Cache entries: {stats['cache_size']}")
         
         # Run quick performance test
         if self.demo_data_loaded:
-            print("\n🏃 QUICK PERFORMANCE TEST:")
+            print("\n QUICK PERFORMANCE TEST:")
             test_user = "alice_tech"
             
             start_time = time.time()
@@ -869,14 +869,14 @@ class RecommendationSystemCLI:
     
     def run_test_suite(self):
         """Run the comprehensive test suite."""
-        print("\n🧪 RUNNING TEST SUITE")
+        print("\n RUNNING TEST SUITE")
         print("-" * 30)
         print("This will run comprehensive tests on all data structures...")
         print("Test results will show the robustness of the implementation.")
         
         confirm = input("\nProceed with test suite? (y/N): ").strip().lower()
         if confirm != 'y':
-            print("❌ Test suite cancelled.")
+            print(" Test suite cancelled.")
             return
         
         try:
@@ -894,19 +894,19 @@ class RecommendationSystemCLI:
             print(f"{'='*80}")
             
             if failures == 0 and errors == 0:
-                print("🎉 ALL TESTS PASSED! System is working perfectly.")
+                print(" ALL TESTS PASSED! System is working perfectly.")
             else:
-                print(f"⚠️ Some tests failed. Review the output above for details.")
+                print(f" Some tests failed. Review the output above for details.")
             
         except ImportError:
-            print("❌ Test suite not found! Make sure test_comprehensive.py is available.")
+            print(" Test suite not found! Make sure test_comprehensive.py is available.")
         except Exception as e:
-            print(f"❌ Error running test suite: {e}")
+            print(f" Error running test suite: {e}")
     
     def data_import_export_menu(self):
         """Handle data import/export functionality."""
         while True:
-            print("\n💾 DATA IMPORT/EXPORT")
+            print("\n DATA IMPORT/EXPORT")
             print("-" * 30)
             print("1. Export Current Data")
             print("2. Import Data from File")
@@ -927,11 +927,11 @@ class RecommendationSystemCLI:
             elif choice == "0":
                 break
             else:
-                print("❌ Invalid choice! Please try again.")
+                print(" Invalid choice! Please try again.")
     
     def _export_data(self):
         """Export current system data to JSON."""
-        print("\n📤 EXPORT DATA")
+        print("\n EXPORT DATA")
         print("-" * 20)
         
         filename = input("Export filename (default: recommendation_data.json): ").strip()
@@ -983,22 +983,22 @@ class RecommendationSystemCLI:
             with open(filepath, 'w') as f:
                 json.dump(export_data, f, indent=2)
             
-            print(f"✅ Data exported successfully to: {filepath}")
+            print(f" Data exported successfully to: {filepath}")
             print(f"   • Interactions: {len(export_data['interactions'])}")
             print(f"   • Similarities: {len(export_data['similarities'])}")
             print(f"   • Categories: {len(export_data['categories'])}")
             
         except Exception as e:
-            print(f"❌ Error exporting data: {e}")
+            print(f" Error exporting data: {e}")
     
     def _import_data(self):
         """Import data from JSON file."""
-        print("\n📥 IMPORT DATA")
+        print("\n IMPORT DATA")
         print("-" * 20)
         
         filename = input("Import filename: ").strip()
         if not filename:
-            print("❌ Filename is required!")
+            print(" Filename is required!")
             return
         
         try:
@@ -1006,10 +1006,10 @@ class RecommendationSystemCLI:
             with open(filepath, 'r') as f:
                 import_data = json.load(f)
             
-            print("⚠️ This will overwrite current data. Continue? (y/N): ", end="")
+            print(" This will overwrite current data. Continue? (y/N): ", end="")
             confirm = input().strip().lower()
             if confirm != 'y':
-                print("❌ Import cancelled.")
+                print(" Import cancelled.")
                 return
             
             # Reset current data
@@ -1041,7 +1041,7 @@ class RecommendationSystemCLI:
                     interaction['user_id'], interaction['item_id'],
                     interaction['rating'], interaction['action'])
             
-            print(f"✅ Data imported successfully from: {filepath}")
+            print(f" Data imported successfully from: {filepath}")
             print(f"   • Interactions: {len(import_data.get('interactions', []))}")
             print(f"   • Similarities: {len(import_data.get('similarities', []))}")
             print(f"   • Categories: {len(import_data.get('categories', {}))}")
@@ -1049,33 +1049,33 @@ class RecommendationSystemCLI:
             self.demo_data_loaded = True
             
         except FileNotFoundError:
-            print(f"❌ File not found: {filename}")
+            print(f" File not found: {filename}")
         except json.JSONDecodeError:
-            print("❌ Invalid JSON file!")
+            print(" Invalid JSON file!")
         except Exception as e:
-            print(f"❌ Error importing data: {e}")
+            print(f" Error importing data: {e}")
     
     def _reset_data(self):
         """Reset all system data."""
-        print("\n🔄 RESET ALL DATA")
+        print("\n RESET ALL DATA")
         print("-" * 20)
         
-        print("⚠️ This will delete ALL current data. This action cannot be undone!")
+        print(" This will delete ALL current data. This action cannot be undone!")
         confirm = input("Type 'RESET' to confirm: ").strip()
         
         if confirm == 'RESET':
             self.engine = RecommendationEngine()
             self.demo_data_loaded = False
-            print("✅ All data has been reset.")
+            print(" All data has been reset.")
         else:
-            print("❌ Reset cancelled.")
+            print(" Reset cancelled.")
     
     def _save_system_state(self):
         """Save current system state with timestamp."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"system_state_{timestamp}.json"
         
-        print(f"\n💾 Saving system state to: {filename}")
+        print(f"\n Saving system state to: {filename}")
         
         # Use the export functionality with automatic filename
         original_input = input
@@ -1114,12 +1114,12 @@ class RecommendationSystemCLI:
                     self.product_similarity_menu()
                 elif choice == "4":
                     # Behavior analysis - simple implementation
-                    print("\n📊 BEHAVIOR ANALYSIS")
+                    print("\n BEHAVIOR ANALYSIS")
                     print("(Feature available through User Interaction Management)")
                     input("\nPress Enter to continue...")
                 elif choice == "5":
                     # Category management - simple implementation
-                    print("\n🏷️ CATEGORY MANAGEMENT")
+                    print("\n CATEGORY MANAGEMENT")
                     print("Categories are managed through the system setup.")
                     print("View category statistics in System Statistics menu.")
                     input("\nPress Enter to continue...")
@@ -1132,20 +1132,20 @@ class RecommendationSystemCLI:
                 elif choice == "9":
                     self.data_import_export_menu()
                 elif choice == "0":
-                    print("\n👋 Thank you for using the E-Commerce Recommendation System!")
+                    print("\n Thank you for using the E-Commerce Recommendation System!")
                     print("Phase 2 Proof of Concept demonstration completed.")
                     break
                 else:
-                    print("❌ Invalid choice! Please select a number from 0-9.")
+                    print(" Invalid choice! Please select a number from 0-9.")
                 
                 if choice != "0":
                     input("\nPress Enter to continue...")
                     
             except KeyboardInterrupt:
-                print("\n\n👋 Goodbye!")
+                print("\n\n Goodbye!")
                 break
             except Exception as e:
-                print(f"\n❌ An error occurred: {e}")
+                print(f"\n An error occurred: {e}")
                 print("Please try again or contact support if the problem persists.")
                 input("\nPress Enter to continue...")
 
@@ -1156,9 +1156,9 @@ def main():
         cli = RecommendationSystemCLI()
         cli.run()
     except KeyboardInterrupt:
-        print("\n\n👋 Application interrupted by user. Goodbye!")
+        print("\n\n Application interrupted by user. Goodbye!")
     except Exception as e:
-        print(f"\n❌ Fatal error: {e}")
+        print(f"\n Fatal error: {e}")
         print("Please check your installation and try again.")
 
 

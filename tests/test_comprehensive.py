@@ -755,9 +755,9 @@ def run_comprehensive_tests():
     print(f"Success rate: {((total_tests - total_failures - total_errors) / total_tests * 100):.1f}%")
     
     if total_failures == 0 and total_errors == 0:
-        print("\n🎉 ALL TESTS PASSED! The system is ready for production use.")
+        print("\n ALL TESTS PASSED! The system is ready for production use.")
     else:
-        print(f"\n⚠️  {total_failures + total_errors} tests failed. Review the failures above.")
+        print(f"\n  {total_failures + total_errors} tests failed. Review the failures above.")
     
     return total_tests, total_failures, total_errors
 
