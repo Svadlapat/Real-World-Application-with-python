@@ -54,7 +54,7 @@ python tests/phase3_performance_benchmark.py
 python tests/phase3_stress_testing.py
 
 # Phase 3 optimization demonstration
-python tests/phase3_demonstration.py
+python tests/quick_phase3_demo.py
 ```
 
 ## Project Structure
