@@ -33,7 +33,7 @@ This project demonstrates the practical application of fundamental data structur
 
 ### Installation
 ```bash
-git clone https://github.com/Svadlapat/Real-world-application-using-python.git
+git clone https://github.com/Svadlapat/Real-World-Application-with-python.git
 cd "Real-World Applications Using Python"
 ```
 
